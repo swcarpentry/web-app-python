@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Page showing request: {{title}}</title>
+  </head>
+  <body>
+    <h1>Request: {{title}}</h1>
+    {% if remainder %}
+    <p>remainder: {{remainder}}</p>
+    {% endif %}
+    <ul>
+      <li>request.method: {{request.method}}</li>
+      <li>request.path: {{request.path}}</li>
+      <li>request.content_type: {{request.content_type}}</li>
+      <li>request.date: {{request.date}}</li>
+      <li>request.referrer: {{request.referrer}}</li>
+    </ul>
+  </body>
+</html>

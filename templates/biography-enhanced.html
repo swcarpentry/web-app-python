@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Biography of {{name}}</title>
+  </head>
+  <body>
+    <h1>{{name}}</h1>
+    {% if facts %}
+      <ol>
+        {% for f in facts %}
+        <li>{{f}}</li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>No facts available.<p>
+    {% endif %}
+  </body>
+</html>

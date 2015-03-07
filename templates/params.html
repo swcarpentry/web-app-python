@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Page showing parameters</title>
+  </head>
+  <body>
+    <h1>Parameters</h1>
+    {% if request.args %}
+    <ul>
+      {% for a in request.args %}
+      <li>{{a}}: {{request.args[a]}}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No parameters.</p>
+    {% endif %}
+  </body>
+</html>
