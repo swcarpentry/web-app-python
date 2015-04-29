@@ -738,7 +738,9 @@ def validate_folder(path, template=None):
 
 def start_logging(level=logging.INFO):
     """Initialize logging and print messages to console."""
-    logging.basicConfig(stream=sys.stdout, level=level)
+    logging.basicConfig(stream=sys.stdout,
+                        level=level,
+                        format="%(levelname)s: %(message)s")
 
 
 def command_line():
@@ -764,6 +766,8 @@ def command_line():
 def check_required_files(dir_to_validate):
     """Check if required files exists."""
     REQUIRED_FILES = ["01-*.md",
+                      "CONDUCT.md",
+                      "CONTRIBUTING.md",
                       "discussion.md",
                       "index.md",
                       "instructors.md",
