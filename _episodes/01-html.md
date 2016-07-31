@@ -1,29 +1,40 @@
 ---
-layout: page
-title: Creating Web Applications with Python
-subtitle: Templating
-minutes: 30
+title: Templating
+teaching: 30
+exercises: 30
+questions:
+- FIXME
+objectives:
+- "Explain the difference between text, elements, and tags."
+- "Explain the difference between a model and a view, and correctly identify instances of each."
+- "Write correctly-formatted HTML (using escape sequences for special characters)."
+- "Identify and fix improperly-nested HTML."
+- "Explain what element attributes are, and what they are for."
+- "Write HTML that uses attributes to alter a document's appearance."
+- "Explain when to use attributes rather than nested elements."
+- "Write correctly-formatted HTML pages containing lists, tables, images, and links."
+- "Add correctly-formatted metadata to the head of an HTML page."
+keypoints:
+- "HTML documents contain elements and text."
+- "Elements are represented using tags."
+- "Different devices may display HTML differently."
+- "Every document must have a single root element."
+- "Special characters must be written using escape sequences beginning with &."
+- "Elements can be customized by adding key-value pairs called attributes."
+- "An element's attributes must be unique, and are unordered."
+- "Attribute values should not have any internal structure."
+- "Put metadata in `meta` elements in a page's `head` element."
+- "Use `ul` for unordered lists and `ol` for ordered lists."
+- "Add comments to pages using `<!--` and `-->`."
+- "Use `table` for tables, with `tr` for rows and `td` for values."
+- "Use `img` for images."
+- "Use `a` to create hyperlinks."
+- "Give elements a unique `id` attribute to link to it."
 ---
-FIXME
 
-<div class="objectives" markdown="1">
-
-#### Learning Objectives
-*   Explain the difference between text, elements, and tags.
-*   Explain the difference between a model and a view, and correctly identify instances of each.
-*   Write correctly-formatted HTML (using escape sequences for special characters).
-*   Identify and fix improperly-nested HTML.
-*   Explain what element attributes are, and what they are for.
-*   Write HTML that uses attributes to alter a document's appearance.
-*   Explain when to use attributes rather than nested elements.
-*   Write correctly-formatted HTML pages containing lists, tables, images, and links.
-*   Add correctly-formatted metadata to the head of an HTML page.
-
-</div>
-
-A basic HTML [document](../../gloss.html#document)
-contains [text](../../gloss.html#text)
-and [elements](../../gloss.html#element).
+A basic HTML [document]({{ site.github.url }}/reference/#document)
+contains [text]({{ site.github.url }}/reference/#text)
+and [elements]({{ site.github.url }}/reference/#element).
 (The full specification allows for many other things
 with names like "external entity references" and "processing instructions",
 but we'll ignore them.)
@@ -33,13 +44,13 @@ it has no intrinsic meaning:
 "Feynman" is just seven characters,
 not a person.
 
-Elements are [metadata](../../gloss.html#metadata)
+Elements are [metadata]({{ site.github.url }}/reference/#metadata)
 that describe the meaning of the document's content.
 For example,
 one element might signal a heading,
 while another might indicate that something is a cross-reference.
 
-Elements are written using [tags](../../gloss.html#tag-xml),
+Elements are written using [tags]({{ site.github.url }}/reference/#tag-xml),
 which must be enclosed in angle brackets `<...>`.
 For example, `<cite>` is used to mark the start of a citation,
 and `</cite>` is used to mark its end.
@@ -51,23 +62,23 @@ but `<outer>...<inner>...</outer></inner>` is not.
 
 Here are some commonly-used HTML tags:
 
-<table>
-  <tr><th>Tag</th>               <th>Usage</th></tr>
-  <tr><td>`html`</td> <td>Root element of entire HTML document.</td></tr>
-  <tr><td>`body`</td> <td>Body of page (i.e., visible content).</td></tr>
-  <tr><td>`h1`</td>   <td>Top-level heading.</td></tr>
-  <tr><td>`h2, h3, ...`</td>   <td>Lower-level heading.</td></tr>
-  <tr><td>`p`</td>    <td>Paragraph.</td></tr>
-  <tr><td>`em`</td>   <td>Emphasized text.</td></tr>
-</table>
+| Tag | Usage |
+|-----|-------|
+| `html` | Root element of entire HTML document |
+| `body` | Body of page (i.e., visible content) |
+| `h1`   | Top-level heading |
+| `h2`, `h3`, ... | Lower-level heading |
+| `p` | Paragraph |
+| `em` | Emphasized text |
 
 Finally,
 every well-formed document started with a `DOCTYPE` declaration,
 which looks like:
 
-<pre>
+~~~
 <!DOCTYPE html>
-</pre>
+~~~
+{: .source}
 
 This tells programs what kind of elements are allowed to appear in the document:
 `html` (by far the most common case),
@@ -84,6 +95,7 @@ Here is a simple HTML document that uses everything we've seen so far:
 </body>
 </html>
 ~~~
+{: .source}
 
 A web browser like Firefox might present this document like this:
 
@@ -110,12 +122,13 @@ so this:
   </body>
 </html>
 ~~~
+{: .source}
 
 will be displayed in exactly the same way as the first version.
 Most people find that the indentation in the second makes it easier to read.
 
 Second,
-we must use [escape sequences](../../gloss.html#escape-sequence)
+we must use [escape sequences]({{ site.github.url }}/reference/#escape-sequence)
 to represent the special characters `<` and `>`
 for the same reason that we have to use `\&quot;`
 inside a double-quoted string in a program.
@@ -126,16 +139,15 @@ followed by the abbreviated name of the character
 and a semi-colon.
 The four most common escape sequences are:
 
-<table>
-  <tr><th>Sequence</th> <th>Character</th></tr>
-  <tr><td>&amp;lt;</td> <td><</td></tr>
-  <tr><td>&amp;gt;</td> <td>></td></tr>
-  <tr><td>&amp;quot;</td> <td>'</td></tr>
-  <tr><td>&amp;amp;</td> <td>&</td></tr>
-</table>
+| Sequence | Character |
+|----------|-----------|
+| `&lt; | `<` |
+| `&gt; | `>` |
+| `&quot; | `'` |
+| `&amp; | `&` |
 
 One final formatting rule is that
-every document must have a single [root element](../../gloss.html#root-element),
+every document must have a single [root element]({{ site.github.url }}/reference/#root-element),
 i.e., a single element must enclose everything else.
 A document like this is therefore not strictly legal:
 
@@ -143,6 +155,7 @@ A document like this is therefore not strictly legal:
 <h1>Dimorphism</h1>
 <p>Occurring or existing in two different <em>forms</em>.</p>
 ~~~
+{: .source}
 
 because it has two top-level elements
 (the `h1` and the `p`).
@@ -151,7 +164,7 @@ though,
 since they're designed to accommodate improperly-formatted HTML,
 but most other programs will complain.
 
-> #### Beautiful Soup
+> ## Beautiful Soup
 >
 > There are a lot of incorrectly-formatted HTML pages out there.
 > To deal with them,
@@ -160,45 +173,51 @@ but most other programs will complain.
 > a run-of-the-mill program can handle.
 > It almost always gets things right,
 > but sticking to the standard makes life a lot easier for everyone.
+{: .callout}
 
-Elements can be customized by giving them [attributes](../../gloss.html#attribute).
+Elements can be customized by giving them [attributes]({{ site.github.url }}/reference/#attribute).
 These are name/value pairs enclosed in the opening tag like this:
 
 ~~~
 <h1 align="center">A Centered Heading</h1>
 ~~~
+{: .source}
 
 or:
 
 ~~~
 <p class="disclaimer">This planet provided as-is.</p>
 ~~~
+{: .source}
 
 Any particular attribute name may appear at most once in any element,
 so `<p align="left" align="right">...</p>` is illegal.
-Attributes' values <em>must</em> be in quotes in XML and older dialects of HTML;
+Attributes' values *must* be in quotes in XML and older dialects of HTML;
 HTML5 allows single-word values to be unquoted,
 but quoting is still recommended.
 
 Another important feature of attributes is that they are unordered.
-They have to be <em>written</em> in some order,
+They have to be *written* in some order,
 but as far as the rules of HTML are concerned:
 
 ~~~
 <p align="center" class="disclaimer">This web page is made from 100% recycled pixels.</p>
 ~~~
+{: .source}
 
 and:
 
 ~~~
 <p class="disclaimer" align="center">This web page is made from 100% recycled pixels.</p>
 ~~~
+{: .source}
 
 mean the same thing.
 
-> #### HTML and Version Control
+> ## HTML and Version Control
 > 
 > FIXME
+{: .callout}
 
 When should we use attributes, and when should we nest elements?
 As a general rule,
@@ -206,7 +225,8 @@ we should use attributes when:
 
 *   each value can occur at most once for any element;
 *   the order of the values doesn't matter; and
-*   those values have no internal structure, i.e., we will never need to parse an attribute's value in order to understand it.
+*   those values have no internal structure,
+    i.e., we will never need to parse an attribute's value in order to understand it.
 
 In all other cases, we should use nested elements.
 However, many widely-used XML formats break these rules
@@ -218,6 +238,7 @@ we would define a rectangle as follows:
 ~~~
 <rect width="300" height="100" style="fill:rgb(0,0,255); stroke-width:1; stroke:rgb(0,0,0)"/>
 ~~~
+{: .source}
 
 In order to understand the `style` attribute,
 a program has to somehow know to split it on semicolons,
@@ -252,6 +273,7 @@ Items inside either kind of list must be wrapped in `li` elements:
 </body>
 </html>
 ~~~
+{: .source}
 
 FIXME: image
 
@@ -298,10 +320,11 @@ or `td` (for "table data"):
 </body>
 </html>
 ~~~
+{: .source}
 
 FIXME: table
 
-> #### Tables, Layout, and CSS
+> ## Tables, Layout, and CSS
 > 
 > Tables are sometimes used to do multi-column layout,
 > as well as for tabular data,
@@ -321,11 +344,12 @@ FIXME: table
 > and that meaning is different from the meaning of `dfn` (a definition)
 > or `cite` (a citation).
 > 
-> Conscientious authors use [Cascading Style Sheets](../../gloss.html#css) (or CSS)
+> Conscientious authors use [Cascading Style Sheets]({{ site.github.url }}/reference/#css) (or CSS)
 > to describe how they want pages to appear,
 > and only use `table` elements for actual tables.
 > CSS is beyond the scope of this lesson,
 > but is described briefly in <a href="extras.html#s:web:Css">The Appendix</A>.
+{: .callout}
 
 HTML pages can also contain images.
 (In fact,
@@ -353,6 +377,7 @@ when a browser displays this:
   </body>
 </html>
 ~~~
+{: .source}
 
 it looks for the file `maddie-chat.jpg`
 in the same directory as the HTML file:
@@ -374,9 +399,10 @@ can be written using this short form.
 Notice also that images don't have to be in the same directory as the pages that refer to them:
 the browser will follow relative paths (ones that don't start with `/`).
 
-> #### It's Always Interpreted
+> ## It's Always Interpreted
 > 
-> FIXME: Absolute paths - the path is <em>always</em> interpreted (web browser config).
+> FIXME: Absolute paths - the path is *always* interpreted (web browser config).
+{: .callout}
 
 Whenever we refer to an image,
 we should use the `img` tag's `alt` attribute
@@ -396,6 +422,7 @@ Adding this to our previous example gives:
 </body>
 </html>
 ~~~
+{: .source}
 
 The other element --- the one that makes HTML pages "hypertext" --- is `a`.
 Whatever is inside the element is displayed and highlighted for clicking;
@@ -427,11 +454,12 @@ we can create a listing of the examples we've written so far like this:
 </body>
 </html>
 ~~~
+{: .source}
 
 FIXME: image
 
 The hyperlink element is called `a` because
-it can also used to create [anchors](../../gloss.html#anchor) in documents
+it can also used to create [anchors]({{ site.github.url }}/reference/#anchor) in documents
 by giving them a `name` attribute instead of an `href`.
 An anchor is simply a location in a document that can be linked to.
 For example,
@@ -447,15 +475,16 @@ from Professor Wheeler, in which he said,
 "Because, they are all the same electron!"
 </blockquote>
 ~~~
+{: .source}
 
 If this quotation was in a file called `quote.html`,
 we could then create a hyperlink directly to the mention of Princeton
-using `<a&nbsp;href="quote.html#princeton-university">`.
+using `<a href="quote.html#princeton-university">`.
 The `#` in the `href`'s value separates the path to the document
 from the anchor we're linking to.
 Inside `quote.html` itself,
 we could link to that same location simply using
-`<a&nbsp;href="#pu">`.
+`<a href="#pu">`.
 
 Using the `a` element for both links and targets was poor design:
 programs are simpler to write if each element has one purpose, and one alone.
@@ -475,6 +504,7 @@ from Professor Wheeler, in which he said,
 "Because, they are all the same electron!"
 </blockquote>
 ~~~
+{: .source}
 
 and then refer to `quote.html#wheeler-electron-quote`
 or `quote.html#princeton-university`.
@@ -509,13 +539,14 @@ we might have:
   </body>
 </html>
 ~~~
+{: .source}
 
 Well-written pages also use comments (just like code),
 which start with `<!--` and end with `-->`.
 
-> #### Hiding Content
+> ## Hiding Content
 > 
-> Commenting out part of a page does <em>not</em> hide the content
+> Commenting out part of a page does *not* hide the content
 > from people who really want to see it:
 > while a browser won't display what's inside a comment,
 > it's still in the page,
@@ -529,24 +560,4 @@ which start with `<!--` and end with `-->`.
 > 
 > If you really don't want people to be able to read something,
 > the only safe thing to do is to keep it off the web.
-
-<div class="keypoints" markdown="1">
-
-#### Summary
-*   HTML documents contain elements and text.
-*   Elements are represented using tags.
-*   Different devices may display HTML differently.
-*   Every document must have a single root element.
-*   Special characters must be written using escape sequences beginning with &.
-*   Elements can be customized by adding key-value pairs called attributes.
-*   An element's attributes must be unique, and are unordered.
-*   Attribute values should not have any internal structure.
-*   Put metadata in `meta` elements in a page's `head` element.
-*   Use `ul` for unordered lists and `ol` for ordered lists.
-*   Add comments to pages using `<!--` and `-->`.
-*   Use `table` for tables, with `tr` for rows and `td` for values.
-*   Use `img` for images.
-*   Use `a` to create hyperlinks.
-*   Give elements a unique `id` attribute to link to it.
-
-</div>
+{: .callout}

@@ -1,11 +1,6 @@
 ---
 layout: page
-title: Creating Web Applications with Python
-subtitle: Instructor's Guide
+title: "Instructors' Guide"
+permalink: /guide/
 ---
-## Legend
-
 FIXME
-
-## Overall
-
